@@ -20,6 +20,21 @@ def create():
   )
   return redirect('/')
 
+@app.route('/delete/<int:index>')
+def delete(index):
+  contacts.pop(index)
+  return redirect('/')
+
+@app.route('/update/<int:index>', methods=['POST'])
+def update(index):
+  name = request.form.get('name')
+  email = request.form.get('email')
+  phone = request.form.get('phone')
+  contacts[index]['name'] = name
+  contacts[index]['email'] = email
+  contacts[index]['phone'] = phone
+  return redirect('/')
+  
 if __name__ == '__main__':
   app.run(host='0.0.0.0')
   
