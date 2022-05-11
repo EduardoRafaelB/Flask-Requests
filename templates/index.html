@@ -20,15 +20,9 @@
     <button type="submit">Adicionar</button>
   </form>
   <ul>
-    {% for contact in contacts %}
+    {% for contacts in contact %}
       <li>
-        <form action="/update/{{loop.index0}}" method="POST">
-          <input name="name" value="{{contact['name']}}">
-          <input name="email" value="{{contact['email']}}">
-          <input name="phone" value="{{contact['phone']}}">
-          <button type="submit">Editar</button>
-          <a href="/delete/{{loop.index0 }}" > ❌</a>
-        </form>
+        {{ contacts.name }}       
       </li>
     {% endfor %}
   </ul>
