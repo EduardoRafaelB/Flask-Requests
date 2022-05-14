@@ -47,7 +47,7 @@ def signin():
     if not user or not check_password_hash(user.password, password):
         return redirect('/login')
 
-    session['user_id'] = user.id
+    session = user.id
     return redirect('/')
 
 
@@ -65,12 +65,9 @@ def signup():
     if user:
         return redirect('/register')
 
-    new_user = users(name=name,
-                     email=email,
-                     password=generate_password_hash(password,
-                                                     method='sha256'))
+    new_user = users(name=name, email=email, password=generate_password_hash(password, method='sha256'))
     db.session.add(new_user)
-    db.commit()
+    db.session.commit()
     return redirect('/login')
 
 
