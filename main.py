@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databese.db'
 db = SQLAlchemy(app)
 
 class users(db.Model):
@@ -40,15 +40,15 @@ def create():
   db.session.commit()
   return redirect('/')
 
-@app.route('/delete/<int:index>')
-def delete(index):
+@app.route('/delete/<int:id>')
+def delete(id):
   contact = contacts.query.filter_by(id=id).first()
   db.session.delete(contact)
   db.session.commit()
   return redirect('/')
 
-@app.route('/update/<int:index>', methods=['POST'])
-def update(index):
+@app.route('/update/<int:id>', methods=['POST'])
+def update(id):
   name = request.form.get('name')
   email = request.form.get('email')
   phone = request.form.get('phone')

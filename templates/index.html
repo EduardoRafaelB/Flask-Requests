@@ -22,7 +22,11 @@
   <ul>
     {% for contacts in contact %}
       <li>
-        {{ contacts.name }}       
+        <form action="/update/{{ contacts.id }}" method="POST"><input name='name' value="{{ contacts.name }}">
+          <input name='email' value="{{ contacts.email }}">
+          <input name='phone' value="{{ contacts.phone }}">
+          <button type="submit">Editar</button>
+          <a href="/delete/{{ contacts.id }}"><button>❌</button></a>
       </li>
     {% endfor %}
   </ul>
