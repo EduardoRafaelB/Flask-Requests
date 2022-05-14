@@ -7,7 +7,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databese.db'
 db = SQLAlchemy(app)
 app.config['SECRET_KEY'] = 'secret'
 
-
 class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
@@ -16,7 +15,6 @@ class users(db.Model):
     created_at = db.Column(db.String(100))
     updated_at = db.Column(db.String(100))
     db.session.commit()
-
 
 class contacts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -36,7 +34,7 @@ def index():
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    return render_template('signin.html')
 
 @app.route('/signin', methods=['POST'])
 def signin():
@@ -45,7 +43,7 @@ def signin():
     user = users.query.filter_by(email=email).first()
 
     if not user or not check_password_hash(user.password, password):
-        return redirect('/login')
+        return redirect('/signin')
 
     session = user.id
     return redirect('/')
@@ -53,7 +51,7 @@ def signin():
 
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    return render_template('signup.html')
 
 
 @app.route('/signup', methods=['POST'])
@@ -63,12 +61,12 @@ def signup():
     password = request.form.get('password')
     user = users.query.filter_by(email=email).first()
     if user:
-        return redirect('/register')
+        return redirect('/signup')
 
     new_user = users(name=name, email=email, password=generate_password_hash(password, method='sha256'))
     db.session.add(new_user)
     db.session.commit()
-    return redirect('/login')
+    return redirect('/signin')
 
 
 @app.route('/create', methods=['POST'])
