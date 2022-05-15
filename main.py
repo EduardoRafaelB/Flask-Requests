@@ -43,7 +43,7 @@ def signin():
     user = users.query.filter_by(email=email).first()
 
     if not user or not check_password_hash(user.password, password):
-        return redirect('/signin')
+        return redirect('/login')
 
     session = user.id
     return redirect('/')
@@ -53,7 +53,6 @@ def signin():
 def register():
     return render_template('register.html')
 
-
 @app.route('/signup', methods=['POST'])
 def signup():
     name = request.form.get('name')
@@ -61,12 +60,12 @@ def signup():
     password = request.form.get('password')
     user = users.query.filter_by(email=email).first()
     if user:
-        return redirect('/signup')
+        return redirect('/register')
 
     new_user = users(name=name, email=email, password=generate_password_hash(password, method='sha256'))
     db.session.add(new_user)
     db.session.commit()
-    return redirect('/signin')
+    return redirect('/login')
 
 
 @app.route('/create', methods=['POST'])
