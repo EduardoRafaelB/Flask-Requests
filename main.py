@@ -10,11 +10,10 @@ app.config['SECRET_KEY'] = 'secret'
 class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    email = db.Column(db.String(100))
+    email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     created_at = db.Column(db.String(100))
     updated_at = db.Column(db.String(100))
-    db.session.commit()
 
 class contacts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,10 +21,9 @@ class contacts(db.Model):
     email = db.Column(db.String(100))
     phone = db.Column(db.String(100))
     image = db.Column(db.String(100))
-    user_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeingKey('users.id'))
     created_at = db.Column(db.String(100))
     updated_at = db.Column(db.String(100))
-    db.session.commit()
 
 @app.route('/')
 def index():
