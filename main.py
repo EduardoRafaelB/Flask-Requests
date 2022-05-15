@@ -21,7 +21,7 @@ class contacts(db.Model):
     email = db.Column(db.String(100))
     phone = db.Column(db.String(100))
     image = db.Column(db.String(100))
-    user_id = db.Column(db.Integer, db.ForeingKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.String(100))
     updated_at = db.Column(db.String(100))
 
