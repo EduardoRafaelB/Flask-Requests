@@ -34,7 +34,7 @@ def index():
 
 @app.route('/login')
 def login():
-    return render_template('signin.html')
+    return render_template('login.html')
 
 @app.route('/signin', methods=['POST'])
 def signin():
@@ -51,7 +51,7 @@ def signin():
 
 @app.route('/register')
 def register():
-    return render_template('signup.html')
+    return render_template('register.html')
 
 
 @app.route('/signup', methods=['POST'])
